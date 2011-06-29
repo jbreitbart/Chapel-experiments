@@ -36,9 +36,8 @@ class tileMatrix {
 		}
 		
 		proc data var {
-			//halt("Don't call me, I call you!");
 			// make sure data is only read after the flag is checked
-			//if (!setter && flag$!=1) then halt ("Error that should not happen 23b");
+			if (!setter && flag$!=1) then halt ("Error that should not happen 23b");
 			
 			return data;
 		}
@@ -72,7 +71,7 @@ proc compute (matrix, id, all) : tileMatrix(int) {
 	var returnee = new tileMatrix(int, matrixSize, matrixSize);
 	forall (x,y) in [0..matrixSize-1, 0..matrixSize-1] {
 		//writeln ("e: ", (x,y));
-		//on (returnee((x,y))) {
+		on (returnee((x,y))) {
 			var t = matrix((x,y));
 			var r = returnee((x,y));
 			if (x==0) {
@@ -82,7 +81,7 @@ proc compute (matrix, id, all) : tileMatrix(int) {
 				var t0 = matrix((x-1,y));
 				r.set(t0.get() + t.get());
 			}
-		//}
+		}
 	}
 	
 	return returnee;
